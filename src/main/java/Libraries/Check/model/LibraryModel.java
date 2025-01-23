@@ -6,23 +6,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class CityModel {
+public class LibraryModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    private String cityName;
 
     @OneToMany(orphanRemoval = true)
     private List<ShelfModel> shelves = new ArrayList<>();
 
-    public CityModel() {
+    public LibraryModel() {
     }
 
-    public CityModel(Long id, String name, List<ShelfModel> shelves) {
+    public LibraryModel(Long id, String cityName, List<ShelfModel> shelves) {
         this.id = id;
-        this.name = name;
+        this.cityName = cityName;
         this.shelves = shelves;
     }
 
@@ -34,12 +34,12 @@ public class CityModel {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getCityName() {
+        return cityName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
     }
 
     public List<ShelfModel> getShelves() {
@@ -54,7 +54,7 @@ public class CityModel {
     public String toString() {
         return "CityModel{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", cityName='" + cityName + '\'' +
                 ", shelves=" + shelves +
                 '}';
     }
