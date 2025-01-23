@@ -1,5 +1,6 @@
 package Libraries.Check.controller;
 
+import Libraries.Check.service.ShelfService;
 import Libraries.Check.model.BookModel;
 import Libraries.Check.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,13 +10,14 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/Libraries")
+@RequestMapping(path = "library")
 public class LibraryController {
-
+  
+    private final ShelfService shelfService;
     private final BookService bookService;
 
     @Autowired
-    public LibraryController(BookService bookService) {
+    public LibraryController(ShelfService shelfService, BookService bookService) {
         this.bookService = bookService;
     }
 

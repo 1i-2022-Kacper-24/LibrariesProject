@@ -1,8 +1,9 @@
 package Libraries.Check.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.*;
-
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 @Entity
 @Table(name = "Book")
@@ -14,12 +15,6 @@ public class BookModel {
     private String title;
     private int pubYear;
     private int pages;
-
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "shelfnumber", nullable = true)
-//    @JsonBackReference
-//    private ShelfModel shelf;
-
 
     public BookModel() {}
 
@@ -34,10 +29,10 @@ public class BookModel {
     public Long getId() {
         return id;
     }
+  
     public void setId(Long id) {
         this.id = id;
     }
-
 
     public String getAuthor() {
         return author;
@@ -46,14 +41,12 @@ public class BookModel {
         this.author = author;
     }
 
-
     public String getTitle() {
         return title;
     }
     public void setTitle(String title) {
         this.title = title;
     }
-
 
     public int getPubYear() {
         return pubYear;
@@ -62,12 +55,17 @@ public class BookModel {
         this.pubYear = pubYear;
     }
 
-
     public int getPages() {
         return pages;
     }
     public void setPages(int pages) {
         this.pages = pages;
     }
-
+ 
+      @Override
+    public String toString() {
+        return "BookModel{" +
+                "id=" + id +
+                '}';
+    }
 }
