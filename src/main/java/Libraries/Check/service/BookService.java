@@ -17,6 +17,12 @@ public class BookService {
         this.bookRepository = bookRepository;
     }
 
+
+    public BookModel addBook(BookModel book) {
+        return bookRepository.save(book);
+    }
+
+
     public List<BookModel> findBooksByAuthor(String author) {
         return bookRepository.findByAuthor(author);
     }
