@@ -1,5 +1,8 @@
 package Libraries.Check.controller;
 
+  
+import Libraries.Check.dto.LibrariesDTO;
+import Libraries.Check.service.LibraryService;
 import Libraries.Check.service.ShelfService;
 import Libraries.Check.model.BookModel;
 import Libraries.Check.service.BookService;
@@ -10,15 +13,22 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping(path = "library")
+@RequestMapping("/library")
 public class LibraryController {
   
     private final ShelfService shelfService;
     private final BookService bookService;
+    private final LibraryService libraryService;
 
     @Autowired
-    public LibraryController(ShelfService shelfService, BookService bookService) {
+    public LibraryController(LibraryService libraryService, ShelfService shelfService, BookService bookService) {
+        this.libraryService = libraryService;
+        this.shelfServie = shelfService;
         this.bookService = bookService;
+    }
+  
+    public LibrariesDTO getAllLibraries() {
+        return (LibrariesDTO) LibrariesDTO.fromModel(libraryService.getAllLibraries());
     }
 
     @GetMapping("/all")

@@ -12,16 +12,20 @@ public class ShelfModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long shelfNumber;
+  
     @OneToMany(orphanRemoval = false)
     private List<BookModel> books = new ArrayList<>();
 
     public ShelfModel() {
     }
 
+
     public ShelfModel(Long id, Long shelfNumber) {
         this.id = id;
         this.shelfNumber = shelfNumber;
     }
+  
+  //
 
     public ShelfModel(Long id, Long shelfNumber, List<BookModel> books) {
         this.id = id;
@@ -37,6 +41,7 @@ public class ShelfModel {
         this.id = id;
     }
 
+//
     public Long getShelfNumber() {
         return shelfNumber;
     }
@@ -53,10 +58,12 @@ public class ShelfModel {
         this.books = books;
     }
 
+
     @Override
     public String toString() {
         return "ShelfModel{" +
                 "id=" + id +
+//
                 ", shelfNumber=" + shelfNumber +
                 ", books=" + books +
                 '}';
