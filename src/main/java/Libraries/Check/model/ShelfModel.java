@@ -29,10 +29,6 @@ public class ShelfModel {
         this.books = books;
     }
 
-    public ShelfModel(Long id) {
-        this.id = id;
-    }
-
     public Long getId() {
         return id;
     }
