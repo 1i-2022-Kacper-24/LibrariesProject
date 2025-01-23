@@ -15,10 +15,10 @@ public class BookModel {
     private int pubYear;
     private int pages;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "", nullable = true)
-//    @JsonBackReference
-//    private ShelfModel shelf;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "shelfnumber", nullable = true)
+    @JsonBackReference
+    private ShelfModel shelf;
 
 
     public BookModel() {}
