@@ -24,6 +24,21 @@ public class LibraryController {
         return bookService.findBooksByAuthor(author);
     }
 
+    @GetMapping("/ByTitle")
+    public List<BookModel> findByTitle(@RequestParam("title") String title) {
+        return bookService.findBooksByTitle(title);
+    }
+
+    @GetMapping("/ByYear")
+    public List<BookModel> findByPubYear(@RequestParam("pubYear") int pubYear) {
+        return bookService.findBooksByPubYear(pubYear);
+    }
+
+    @GetMapping("/ByPages")
+    public List<BookModel> findByPages(@RequestParam("pages") int pages) {
+        return bookService.findBooksByPages(pages);
+    }
+
     @PostMapping
     public BookModel postBook(@RequestBody BookModel book) {
         return bookService.addBook(book);
