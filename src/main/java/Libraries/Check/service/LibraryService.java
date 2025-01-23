@@ -1,6 +1,8 @@
 package Libraries.Check.service;
 
 import Libraries.Check.model.BookModel;
+import Libraries.Check.model.LibraryModel;
+import Libraries.Check.model.ShelfModel;
 import Libraries.Check.repository.LibraryRepository;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,12 @@ public class LibraryService {
         this.libraryRepository = libraryRepository;
     }
 
-    public List<BookModel> get
+    public LibraryModel getLibraryByShelf(ShelfModel shelf) {
+        return libraryRepository.findByShelvesContains(shelf);
+    }
+
+    public List<LibraryModel> getAllLibraries() {
+        return libraryRepository.findAll();
+    }
 
 }
