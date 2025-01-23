@@ -19,6 +19,9 @@ public class LibraryController {
         this.bookService = bookService;
     }
 
+    @GetMapping("/all")
+    public List<BookModel> getAll() { return bookService.getAllBooks();}
+
     @GetMapping("/ByAuthor")
     public List<BookModel> findByAuthor(@RequestParam("author") String author) {
         return bookService.findBooksByAuthor(author);

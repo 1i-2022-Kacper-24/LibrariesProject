@@ -22,6 +22,10 @@ public class BookService {
         return bookRepository.save(book);
     }
 
+    public List<BookModel> getAllBooks() {
+        return bookRepository.findAll();
+    }
+
 
     public List<BookModel> findBooksByAuthor(String author) {
         return bookRepository.findByAuthor(author);
