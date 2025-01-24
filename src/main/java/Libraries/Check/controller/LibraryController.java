@@ -2,6 +2,7 @@ package Libraries.Check.controller;
 
   
 import Libraries.Check.dto.LibrariesDTO;
+import Libraries.Check.model.LibraryModel;
 import Libraries.Check.service.LibraryService;
 import Libraries.Check.service.ShelfService;
 import Libraries.Check.model.BookModel;
@@ -30,6 +31,10 @@ public class LibraryController {
     public LibrariesDTO getAllLibraries() {
         return (LibrariesDTO) LibrariesDTO.fromModel(libraryService.getAllLibraries());
     }
+
+    @GetMapping("/allLibs")
+    public List<LibraryModel> getAllLibs() {return libraryService.getAllLibraries();}
+
 
     @GetMapping("/all")
     public List<BookModel> getAll() { return bookService.getAllBooks();}
