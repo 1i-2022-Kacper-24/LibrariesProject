@@ -1,4 +1,4 @@
-package Libraries.Check.service;
+package libraries.check.service;
 
 public class BookService {
 }

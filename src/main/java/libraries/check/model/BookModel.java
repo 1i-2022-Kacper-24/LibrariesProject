@@ -1,4 +1,4 @@
-package Libraries.Check.model;
+package libraries.check.model;
 
 public class BookModel {
 }

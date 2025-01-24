@@ -1,4 +1,4 @@
-package Libraries.Check.repository;
+package libraries.check.repository;
 
 public interface BookRepository {
 }

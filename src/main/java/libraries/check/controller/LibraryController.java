@@ -1,4 +1,4 @@
-package Libraries.Check.controller;
+package libraries.check.controller;
 
 public class LibraryController {
 }
