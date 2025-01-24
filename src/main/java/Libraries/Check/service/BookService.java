@@ -43,5 +43,12 @@ public class BookService {
         return bookRepository.findByPages(pages);
     }
 
+    public List<BookModel> findBooksByPagesGreaterThan(int pages) {
+        return bookRepository.findByPagesGreaterThan(pages);
+    }
+
+    public List<BookModel> findBooksByPagesLessThan(int pages) {
+        return bookRepository.findByPagesLessThan(pages);
+    }
 
 }

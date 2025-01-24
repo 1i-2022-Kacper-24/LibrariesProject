@@ -12,4 +12,6 @@ public interface BookRepository extends JpaRepository<BookModel, Integer> {
     List<BookModel> findByTitle(String title);
     List<BookModel> findByPubYear(int pubYear);
     List<BookModel> findByPages(int pages);
+    List<BookModel> findByPagesGreaterThan(int pages);
+    List<BookModel> findByPagesLessThan(int pages);
 }

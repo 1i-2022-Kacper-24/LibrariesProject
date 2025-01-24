@@ -23,7 +23,7 @@ public class LibraryController {
     @Autowired
     public LibraryController(LibraryService libraryService, ShelfService shelfService, BookService bookService) {
         this.libraryService = libraryService;
-        this.shelfServie = shelfService;
+        this.shelfService = shelfService;
         this.bookService = bookService;
     }
   
@@ -52,6 +52,16 @@ public class LibraryController {
     @GetMapping("/ByPages")
     public List<BookModel> findByPages(@RequestParam("pages") int pages) {
         return bookService.findBooksByPages(pages);
+    }
+
+    @GetMapping("/ByLeastPages")
+    public List<BookModel> findByPagesGreaterThan(@RequestParam("pages") int pages) {
+        return bookService.findBooksByPagesGreaterThan(pages);
+    }
+
+    @GetMapping("ByMaxPages")
+    public List<BookModel> findByPagesLessThan(@RequestParam("pages") int pages) {
+        return bookService.findBooksByPagesLessThan(pages);
     }
 
     @PostMapping
