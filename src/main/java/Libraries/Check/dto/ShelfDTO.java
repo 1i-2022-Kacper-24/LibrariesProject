@@ -1,4 +1,4 @@
-package Libraries.Check;
+package Libraries.Check.dto;
 
 import Libraries.Check.model.ShelfModel;
 
