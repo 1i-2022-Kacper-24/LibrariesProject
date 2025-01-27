@@ -39,34 +39,14 @@ public class LibraryController {
     @GetMapping("/all")
     public List<BookModel> getAll() { return bookService.getAllBooks();}
 
-    @GetMapping("/ByAuthor")
-    public List<BookModel> findByAuthor(@RequestParam("author") String author) {
-        return bookService.findBooksByAuthor(author);
-    }
-
-    @GetMapping("/ByTitle")
-    public List<BookModel> findByTitle(@RequestParam("title") String title) {
-        return bookService.findBooksByTitle(title);
-    }
-
-    @GetMapping("/ByYear")
-    public List<BookModel> findByPubYear(@RequestParam("pubYear") int pubYear) {
-        return bookService.findBooksByPubYear(pubYear);
-    }
-
-    @GetMapping("/ByPages")
-    public List<BookModel> findByPages(@RequestParam("pages") int pages) {
-        return bookService.findBooksByPages(pages);
-    }
-
-    @GetMapping("/ByLeastPages")
-    public List<BookModel> findByPagesGreaterThan(@RequestParam("pages") int pages) {
-        return bookService.findBooksByPagesGreaterThan(pages);
-    }
-
-    @GetMapping("ByMaxPages")
-    public List<BookModel> findByPagesLessThan(@RequestParam("pages") int pages) {
-        return bookService.findBooksByPagesLessThan(pages);
+    @GetMapping("/search")
+    public List<BookModel> searchBooks(
+            @RequestParam(value = "author", required = false) String author,
+            @RequestParam(value = "title", required = false) String title,
+            @RequestParam(value = "pubYear", required = false) Integer pubYear,
+            @RequestParam(value = "pages", required = false) Integer pages,
+            @RequestParam(value = "pagesIndicator", required = false, defaultValue = "0") int pagesIndicator){
+        return bookService.search(author,title,pubYear,pages,pagesIndicator);
     }
 
     @PostMapping

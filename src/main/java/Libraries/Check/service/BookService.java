@@ -27,6 +27,33 @@ public class BookService {
     }
 
 
+
+    public List<BookModel> search(String author, String title, Integer pubYear, Integer pages, int pagesIndicator) {
+
+        if (author != null) {
+            return bookRepository.findByAuthor(author);
+        }
+        else if (title != null) {
+            return bookRepository.findByTitle(title);
+        }
+        else if (pubYear != null) {
+            return bookRepository.findByPubYear(pubYear);
+        }
+        else if (pages != null) {
+            if (pagesIndicator < 0) {
+                return bookRepository.findByPagesLessThan(pages);
+            }
+            else if (pagesIndicator > 0) {
+                return bookRepository.findByPagesGreaterThan(pages);
+            }
+            else {
+                return bookRepository.findByPages(pages);
+            }
+        }
+        return null;
+    }
+
+
     public List<BookModel> findBooksByAuthor(String author) {
         return bookRepository.findByAuthor(author);
     }
