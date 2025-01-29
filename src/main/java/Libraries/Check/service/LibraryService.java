@@ -7,6 +7,7 @@ import Libraries.Check.repository.LibraryRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class LibraryService {
@@ -25,4 +26,10 @@ public class LibraryService {
         return libraryRepository.findAll();
     }
 
+    public List<LibraryModel> getLibraryWithShelfByBook(List<BookModel> books) {
+        return libraryRepository.findAllByShelves_Books_IdIn(
+                books.stream()
+                .map(BookModel::getId)
+                .collect(Collectors.toUnmodifiableList()));
+    }
 }
