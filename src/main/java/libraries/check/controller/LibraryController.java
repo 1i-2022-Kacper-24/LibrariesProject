@@ -45,10 +45,10 @@ public class LibraryController {
     public List<BookFoundDTO> searchBooks(
             @RequestParam(value = "author", required = false) String author,
             @RequestParam(value = "title", required = false) String title,
-            @RequestParam(value = "pubYear", required = false) Integer pubYear,
+            @RequestParam(value = "publicationYear", required = false) Integer publicationYear,
             @RequestParam(value = "pages", required = false) Integer pages,
             @RequestParam(value = "pagesIndicator", required = false, defaultValue = "0") int pagesIndicator){
-        return bookService.search(author,title,pubYear,pages,pagesIndicator);
+        return bookService.search(author,title,publicationYear,pages,pagesIndicator);
     }
 
     @PostMapping
