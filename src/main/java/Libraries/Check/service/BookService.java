@@ -1,20 +1,26 @@
 package Libraries.Check.service;
 
+import Libraries.Check.dto.BookFoundDTO;
 import Libraries.Check.model.BookModel;
+import Libraries.Check.model.LibraryModel;
+import Libraries.Check.model.ShelfModel;
 import Libraries.Check.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class BookService {
 
     private final BookRepository bookRepository;
+    private final LibraryService libraryService;
 
     @Autowired
-    public BookService(BookRepository bookRepository) {
+    public BookService(BookRepository bookRepository, LibraryService libraryService) {
         this.bookRepository = bookRepository;
+        this.libraryService = libraryService;
     }
 
 
@@ -28,29 +34,43 @@ public class BookService {
 
 
 
-    public List<BookModel> search(String author, String title, Integer pubYear, Integer pages, int pagesIndicator) {
-
-        if (author != null) {
-            return bookRepository.findByAuthor(author);
+    public List<BookFoundDTO> search(String author, String title, Integer pubYear, Integer pages, Integer pagesIndicator) {
+        List<BookModel> books = new ArrayList<>();
+        if (author != null && !author.isBlank()) {
+            books = bookRepository.findByAuthor(author).stream().toList();
         }
-        else if (title != null) {
-            return bookRepository.findByTitle(title);
+        else if (title != null && !title.isBlank()) {
+            books = bookRepository.findByTitle(title);
         }
-        else if (pubYear != null) {
-            return bookRepository.findByPubYear(pubYear);
+        else if (pubYear != null && pubYear.describeConstable().isPresent()) {
+            books = bookRepository.findByPubYear(pubYear);
         }
-        else if (pages != null) {
+        else if (pages != null && pages.describeConstable().isPresent()) {
             if (pagesIndicator < 0) {
-                return bookRepository.findByPagesLessThan(pages);
+                books = bookRepository.findByPagesLessThan(pages);
             }
             else if (pagesIndicator > 0) {
-                return bookRepository.findByPagesGreaterThan(pages);
+                books = bookRepository.findByPagesGreaterThan(pages);
             }
             else {
-                return bookRepository.findByPages(pages);
+                books = bookRepository.findByPages(pages);
             }
         }
-        return null;
+        if (books.isEmpty()) {
+            return new ArrayList<>();
+        }
+        List<LibraryModel> librariesWithShelvesWithBooks = libraryService.getLibraryWithShelfByBook(books);
+        List<BookFoundDTO> booksFound = new ArrayList<>();
+        for(LibraryModel library : librariesWithShelvesWithBooks) {
+            for(ShelfModel shelf : library.getShelves()) {
+                for(BookModel book : shelf.getBooks()) {
+                    if(books.contains(book)) {
+                        booksFound.add(BookFoundDTO.fromModel(book, library, shelf));
+                    }
+                }
+            }
+        }
+        return booksFound;
     }
 
 

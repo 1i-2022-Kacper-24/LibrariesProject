@@ -1,6 +1,7 @@
 package Libraries.Check.controller;
 
   
+import Libraries.Check.dto.BookFoundDTO;
 import Libraries.Check.dto.LibrariesDTO;
 import Libraries.Check.model.LibraryModel;
 import Libraries.Check.service.LibraryService;
@@ -41,7 +42,7 @@ public class LibraryController {
     public List<BookModel> getAll() { return bookService.getAllBooks();}
 
     @GetMapping("/search")
-    public List<BookModel> searchBooks(
+    public List<BookFoundDTO> searchBooks(
             @RequestParam(value = "author", required = false) String author,
             @RequestParam(value = "title", required = false) String title,
             @RequestParam(value = "pubYear", required = false) Integer pubYear,
