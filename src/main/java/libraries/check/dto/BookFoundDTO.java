@@ -1,9 +1,9 @@
-package Libraries.Check.dto;
+package libraries.check.dto;
 
 
-import Libraries.Check.model.BookModel;
-import Libraries.Check.model.LibraryModel;
-import Libraries.Check.model.ShelfModel;
+import libraries.check.model.BookModel;
+import libraries.check.model.LibraryModel;
+import libraries.check.model.ShelfModel;
 
 public class BookFoundDTO {
 

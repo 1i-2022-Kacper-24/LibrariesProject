@@ -1,13 +1,13 @@
-package Libraries.Check.controller;
+package libraries.check.controller;
 
   
-import Libraries.Check.dto.BookFoundDTO;
-import Libraries.Check.dto.LibrariesDTO;
-import Libraries.Check.model.LibraryModel;
-import Libraries.Check.service.LibraryService;
-import Libraries.Check.service.ShelfService;
-import Libraries.Check.model.BookModel;
-import Libraries.Check.service.BookService;
+import libraries.check.dto.BookFoundDTO;
+import libraries.check.dto.LibrariesDTO;
+import libraries.check.model.LibraryModel;
+import libraries.check.service.LibraryService;
+import libraries.check.service.ShelfService;
+import libraries.check.model.BookModel;
+import libraries.check.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

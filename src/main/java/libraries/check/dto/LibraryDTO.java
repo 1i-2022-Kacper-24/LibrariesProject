@@ -1,6 +1,6 @@
-package Libraries.Check.dto;
+package libraries.check.dto;
 
-import Libraries.Check.model.LibraryModel;
+import libraries.check.model.LibraryModel;
 
 public class LibraryDTO {
     private String cityName;

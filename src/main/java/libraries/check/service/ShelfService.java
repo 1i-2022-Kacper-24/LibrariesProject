@@ -1,8 +1,8 @@
-package Libraries.Check.service;
+package libraries.check.service;
 
-import Libraries.Check.model.BookModel;
-import Libraries.Check.model.ShelfModel;
-import Libraries.Check.repository.ShelfRepository;
+import libraries.check.model.BookModel;
+import libraries.check.model.ShelfModel;
+import libraries.check.repository.ShelfRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package Libraries.Check;
+package libraries.check;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

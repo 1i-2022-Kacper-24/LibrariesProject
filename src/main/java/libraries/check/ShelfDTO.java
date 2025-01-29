@@ -1,6 +1,6 @@
-package Libraries.Check;
+package libraries.check;
 
-import Libraries.Check.model.ShelfModel;
+import libraries.check.model.ShelfModel;
 
 public class ShelfDTO {
     public Long shelfNumber;

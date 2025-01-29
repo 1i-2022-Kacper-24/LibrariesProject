@@ -1,6 +1,6 @@
-package Libraries.Check.dto;
+package libraries.check.dto;
 
-import Libraries.Check.model.LibraryModel;
+import libraries.check.model.LibraryModel;
 
 import java.util.ArrayList;
 import java.util.List;

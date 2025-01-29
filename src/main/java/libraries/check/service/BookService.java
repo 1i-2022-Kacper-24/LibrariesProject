@@ -1,10 +1,10 @@
-package Libraries.Check.service;
+package libraries.check.service;
 
-import Libraries.Check.dto.BookFoundDTO;
-import Libraries.Check.model.BookModel;
-import Libraries.Check.model.LibraryModel;
-import Libraries.Check.model.ShelfModel;
-import Libraries.Check.repository.BookRepository;
+import libraries.check.dto.BookFoundDTO;
+import libraries.check.model.BookModel;
+import libraries.check.model.LibraryModel;
+import libraries.check.model.ShelfModel;
+import libraries.check.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

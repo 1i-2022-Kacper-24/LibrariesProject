@@ -1,7 +1,7 @@
-package Libraries.Check.repository;
+package libraries.check.repository;
 
-import Libraries.Check.model.LibraryModel;
-import Libraries.Check.model.ShelfModel;
+import libraries.check.model.LibraryModel;
+import libraries.check.model.ShelfModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
