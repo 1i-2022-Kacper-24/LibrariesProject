@@ -46,9 +46,10 @@ public class LibraryController {
             @RequestParam(value = "author", required = false) String author,
             @RequestParam(value = "title", required = false) String title,
             @RequestParam(value = "publicationYear", required = false) Integer publicationYear,
+            @RequestParam(value = "publicationIndicator", required = false, defaultValue = "0") int publicationIndicator,
             @RequestParam(value = "numberOfPages", required = false) Integer numberOfPages,
             @RequestParam(value = "pagesIndicator", required = false, defaultValue = "0") int pagesIndicator){
-        return bookService.search(author,title,publicationYear,numberOfPages,pagesIndicator);
+        return bookService.search(author,title,publicationYear,publicationIndicator,numberOfPages,pagesIndicator);
     }
 
     @PostMapping

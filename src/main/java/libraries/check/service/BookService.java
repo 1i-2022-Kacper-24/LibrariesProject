@@ -34,7 +34,7 @@ public class BookService {
 
 
 
-    public List<BookFoundDTO> search(String author, String title, Integer pubYear, Integer pages, Integer pagesIndicator) {
+    public List<BookFoundDTO> search(String author, String title, Integer pubYear, Integer publicationIndicator, Integer pages, Integer pagesIndicator) {
         List<BookModel> books = new ArrayList<>();
         if (author != null && !author.isBlank()) {
             books = bookRepository.findByAuthor(author).stream().toList();
@@ -43,7 +43,15 @@ public class BookService {
             books = bookRepository.findByTitle(title);
         }
         else if (pubYear != null && pubYear.describeConstable().isPresent()) {
-            books = bookRepository.findByPubYear(pubYear);
+            if (publicationIndicator < 0) {
+                books = bookRepository.findByPubYearLessThan(pubYear);
+            }
+            else if (publicationIndicator > 0) {
+                books = bookRepository.findByPubYearGreaterThan(pubYear);
+            }
+            else {
+                books = bookRepository.findByPubYear(pubYear);
+            }
         }
         else if (pages != null && pages.describeConstable().isPresent()) {
             if (pagesIndicator < 0) {
@@ -85,6 +93,15 @@ public class BookService {
     public List<BookModel> findBooksByPubYear(int pubYear) {
         return bookRepository.findByPubYear(pubYear);
     }
+
+    public List<BookModel> findBooksByPubYearGreaterThan(int pubYear) {
+        return bookRepository.findByPubYearGreaterThan(pubYear);
+    }
+
+    public List<BookModel> findBooksByPubYearLessThan(int pubYear) {
+        return bookRepository.findByPubYearLessThan(pubYear);
+    }
+
 
     public List<BookModel> findBooksByPages(int pages) {
         return bookRepository.findByPages(pages);
