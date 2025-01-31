@@ -14,24 +14,24 @@ public interface BookRepository extends JpaRepository<BookModel, Integer> {
     @Query(value = "SELECT b FROM BookModel b WHERE LOWER(b.author) LIKE LOWER(CONCAT('%', :author, '%'))")
     List<BookModel> findByAuthor(@Param("author")String author);
 
+    @Query(value = "SELECT b FROM BookModel b WHERE LOWER(b.title) LIKE LOWER(CONCAT('%', :title, '%'))")
+    List<BookModel> findByTitle(@Param("title")String title);
 
-    List<BookModel> findByTitle(String title);
+    @Query(value = "SELECT b FROM BookModel b WHERE b.pubYear = :publicationYear")
+    List<BookModel> findByPubYear(@Param("publicationYear") int publicationYear);
 
+    @Query(value = "SELECT b FROM BookModel b WHERE b.pubYear > :publicationYear")
+    List<BookModel> findByPubYearGreaterThan(@Param("publicationYear") int publicationYear);
 
-    List<BookModel> findByPubYear(int pubYear);
+    @Query(value = "SELECT b FROM BookModel b WHERE b.pubYear < :publicationYear")
+    List<BookModel> findByPubYearLessThan(@Param("publicationYear") int publicationYear);
 
+    @Query(value = "SELECT b FROM BookModel b WHERE b.pages = :numberOfPages")
+    List<BookModel> findByPages(@Param("numberOfPages") int numberOfPages);
 
-    List<BookModel> findByPubYearGreaterThan(int pubYear);
+    @Query(value = "SELECT b FROM BookModel b WHERE b.pages > :numberOfPages")
+    List<BookModel> findByPagesGreaterThan(@Param("numberOfPages") int numberOfPages);
 
-
-    List<BookModel> findByPubYearLessThan(int pubYear);
-
-
-    List<BookModel> findByPages(int pages);
-
-
-    List<BookModel> findByPagesGreaterThan(int pages);
-
-
-    List<BookModel> findByPagesLessThan(int pages);
+    @Query(value = "SELECT b FROM BookModel b WHERE b.pages < :numberOfPages")
+    List<BookModel> findByPagesLessThan(@Param("numberOfPages") int numberOfPages);
 }
