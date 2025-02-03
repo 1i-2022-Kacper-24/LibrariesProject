@@ -1,4 +1,4 @@
-package libraries.check;
+package libraries.check.dto;
 
 import libraries.check.model.ShelfModel;
 
