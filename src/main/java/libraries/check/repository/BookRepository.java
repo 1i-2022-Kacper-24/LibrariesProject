@@ -1,5 +1,6 @@
 package libraries.check.repository;
 
+import libraries.check.dto.BookFoundDTO;
 import libraries.check.model.BookModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.NativeQuery;
@@ -25,24 +26,29 @@ public interface BookRepository extends JpaRepository<BookModel, Integer> {
                                 (pagesIndicator = 0) equal to numberOfPages
                                 (pagesIndicator < 0) less than numberOfPages
     */
-    @Query(value = "SELECT b FROM BookModel b " +
+    @Query("SELECT new libraries.check.dto.BookFoundDTO(b.title, b.author, b.pubYear, b.pages, s.shelfNumber, l.cityName) " +
+            "FROM BookModel b " +
+            "JOIN b.shelf s " + // Join with shelf
+            "JOIN s.library l " + // Join with library
             "WHERE LOWER(b.author) LIKE LOWER(CONCAT('%', :author, '%')) " +
-                "AND LOWER(b.title) LIKE LOWER(CONCAT('%', :title, '%')) " +
-                "AND (:publicationYear IS NULL OR :publicationIndicator IS NULL " +
-                    "OR (:publicationIndicator > 0 AND b.pubYear > :publicationYear) " +
-                    "OR (:publicationIndicator = 0 AND b.pubYear = :publicationYear) " +
-                    "OR (:publicationIndicator < 0 AND b.pubYear < :publicationYear)) " +
-                "AND (:numberOfPages IS NULL OR :pagesIndicator IS NULL " +
-                    "OR (:pagesIndicator > 0 AND b.pages > :numberOfPages) " +
-                    "OR (:pagesIndicator = 0 AND b.pages = :numberOfPages) " +
-                    "OR (:pagesIndicator < 0 AND b.pages < :numberOfPages))"
+            "AND LOWER(b.title) LIKE LOWER(CONCAT('%', :title, '%')) " +
+            "AND (:publicationYear IS NULL OR :publicationIndicator IS NULL " +
+            "OR (:publicationIndicator > 0 AND b.pubYear > :publicationYear) " +
+            "OR (:publicationIndicator = 0 AND b.pubYear = :publicationYear) " +
+            "OR (:publicationIndicator < 0 AND b.pubYear < :publicationYear)) " +
+            "AND (:numberOfPages IS NULL OR :pagesIndicator IS NULL " +
+            "OR (:pagesIndicator > 0 AND b.pages > :numberOfPages) " +
+            "OR (:pagesIndicator = 0 AND b.pages = :numberOfPages) " +
+            "OR (:pagesIndicator < 0 AND b.pages < :numberOfPages)) " +
+            "AND LOWER(l.cityName) LIKE LOWER(CONCAT('%', :cityName, '%')) " +
+            "AND (:shelfNumber IS NULL OR s.shelfNumber = :shelfNumber)"
     )
-    List<BookModel> findAllByParameters(@Param("author")String author,
-                                        @Param("title")String title,
-                                        @Param("publicationYear") Integer publicationYear,
-                                        @Param("publicationIndicator") Integer publicationIndicator,
-                                        @Param("numberOfPages") Integer numberOfPages,
-                                        @Param("pagesIndicator") Integer pagesIndicator
-                                        );
-
+    List<BookFoundDTO> findAllByParameters(@Param("author") String author,
+                                           @Param("title") String title,
+                                           @Param("publicationYear") Integer publicationYear,
+                                           @Param("publicationIndicator") Integer publicationIndicator,
+                                           @Param("numberOfPages") Integer numberOfPages,
+                                           @Param("pagesIndicator") Integer pagesIndicator,
+                                           @Param("cityName") String cityName,
+                                           @Param("shelfNumber") Long shelfNumber);
 }

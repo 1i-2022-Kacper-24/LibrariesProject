@@ -31,29 +31,11 @@ public class BookService {
         return bookRepository.findAll();
     }
 
-    public List<BookFoundDTO> search(String author, String title, Integer pubYear, Integer publicationIndicator, Integer pages, Integer pagesIndicator) {
-        List<BookModel> books = new ArrayList<>();
-
-        books = findAllBooksByParameters(author, title, pubYear, publicationIndicator, pages, pagesIndicator);
-
-        List<LibraryModel> librariesWithShelvesWithBooks = libraryService.getLibraryWithShelfByBook(books);
-        List<BookFoundDTO> booksFound = new ArrayList<>();
-        for(LibraryModel library : librariesWithShelvesWithBooks) {
-            for(ShelfModel shelf : library.getShelves()) {
-                for(BookModel book : shelf.getBooks()) {
-                    if(books.contains(book)) {
-                        booksFound.add(BookFoundDTO.fromModel(book, library, shelf));
-                    }
-                }
-            }
-        }
-        return booksFound;
-    }
-
-    public List<BookModel> findAllBooksByParameters(String author, String title, Integer pubYear, Integer publicationIndicator, Integer pages, Integer pagesIndicator) {
+    public List<BookFoundDTO> search(String author, String title, Integer pubYear, Integer publicationIndicator, Integer pages, Integer pagesIndicator, String cityName, Long shelfNumber) {
         String authorParam = author != null ? author : "";
         String titleParam = title != null ? title : "";
-        return bookRepository.findAllByParameters(authorParam, titleParam, pubYear, publicationIndicator, pages, pagesIndicator);
+        String cityParam = cityName != null ? cityName : "";
+        return bookRepository.findAllByParameters(authorParam, titleParam, pubYear, publicationIndicator, pages, pagesIndicator, cityParam, shelfNumber);
     }
 
 }

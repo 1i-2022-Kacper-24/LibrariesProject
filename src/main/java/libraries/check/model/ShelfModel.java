@@ -1,38 +1,27 @@
 package libraries.check.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "shelf")
 public class ShelfModel {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private Long shelfNumber;
-  
-    @OneToMany(orphanRemoval = false)
-    private List<BookModel> books = new ArrayList<>();
 
-    public ShelfModel() {
-    }
+    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name = "library_id")
+    private LibraryModel library;
 
+    @OneToMany(mappedBy = "shelf")
+    private List<BookModel> books;
 
-    public ShelfModel(Long id, Long shelfNumber) {
-        this.id = id;
-        this.shelfNumber = shelfNumber;
-    }
-  
-  //
-
-    public ShelfModel(Long id, Long shelfNumber, List<BookModel> books) {
-        this.id = id;
-        this.shelfNumber = shelfNumber;
-        this.books = books;
-    }
+    // Getters and setters
 
     public Long getId() {
         return id;
@@ -42,7 +31,6 @@ public class ShelfModel {
         this.id = id;
     }
 
-//
     public Long getShelfNumber() {
         return shelfNumber;
     }
@@ -51,22 +39,19 @@ public class ShelfModel {
         this.shelfNumber = shelfNumber;
     }
 
+    public LibraryModel getLibrary() {
+        return library;
+    }
+
+    public void setLibrary(LibraryModel library) {
+        this.library = library;
+    }
+
     public List<BookModel> getBooks() {
         return books;
     }
 
     public void setBooks(List<BookModel> books) {
         this.books = books;
-    }
-
-
-    @Override
-    public String toString() {
-        return "ShelfModel{" +
-                "id=" + id +
-//
-                ", shelfNumber=" + shelfNumber +
-                ", books=" + books +
-                '}';
     }
 }

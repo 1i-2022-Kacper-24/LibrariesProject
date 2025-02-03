@@ -1,31 +1,23 @@
 package libraries.check.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "library")
 public class LibraryModel {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String cityName;
 
-    @OneToMany(orphanRemoval = true)
-    private List<ShelfModel> shelves = new ArrayList<>();
+    @JsonBackReference
+    @OneToMany(mappedBy = "library")
+    private List<ShelfModel> shelves;
 
-    public LibraryModel() {
-    }
-
-    public LibraryModel(Long id, String cityName, List<ShelfModel> shelves) {
-        this.id = id;
-        this.cityName = cityName;
-        this.shelves = shelves;
-    }
+    // Getters and setters
 
     public Long getId() {
         return id;
@@ -50,14 +42,4 @@ public class LibraryModel {
     public void setShelves(List<ShelfModel> shelves) {
         this.shelves = shelves;
     }
-
-    @Override
-    public String toString() {
-        return "CityModel{" +
-                "id=" + id +
-                ", cityName='" + cityName + '\'' +
-                ", shelves=" + shelves +
-                '}';
-    }
-
 }

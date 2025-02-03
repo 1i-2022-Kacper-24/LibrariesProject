@@ -18,18 +18,8 @@ public class LibraryService {
         this.libraryRepository = libraryRepository;
     }
 
-    public LibraryModel getLibraryByShelf(ShelfModel shelf) {
-        return libraryRepository.findByShelvesContains(shelf);
-    }
-
     public List<LibraryModel> getAllLibraries() {
         return libraryRepository.findAll();
     }
 
-    public List<LibraryModel> getLibraryWithShelfByBook(List<BookModel> books) {
-        return libraryRepository.findAllByShelves_Books_IdIn(
-                books.stream()
-                .map(BookModel::getId)
-                .collect(Collectors.toUnmodifiableList()));
-    }
 }
