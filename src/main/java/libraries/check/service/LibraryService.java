@@ -1,5 +1,6 @@
 package libraries.check.service;
 
+import libraries.check.dto.LibraryDTO;
 import libraries.check.model.BookModel;
 import libraries.check.model.LibraryModel;
 import libraries.check.model.ShelfModel;
@@ -22,8 +23,8 @@ public class LibraryService {
         return libraryRepository.findByShelvesContains(shelf);
     }
 
-    public List<LibraryModel> getAllLibraries() {
-        return libraryRepository.findAll();
+    public List<LibraryDTO> getAllLibraries() {
+        return libraryRepository.findAll().stream().map(LibraryDTO::fromModel).toList();
     }
 
     public List<LibraryModel> getLibraryWithShelfByBook(List<BookModel> books) {
