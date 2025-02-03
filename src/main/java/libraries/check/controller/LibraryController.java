@@ -35,8 +35,9 @@ public class LibraryController {
     }
 
     @GetMapping("/allLibs")
-    public List<LibraryModel> getAllLibs() {return libraryService.getAllLibraries();}
-
+    public LibrariesDTO getAllLibs() {
+        return LibrariesDTO.fromModel(libraryService.getAllLibraries());
+    }
 
     @GetMapping("/all")
     public List<BookModel> getAll() { return bookService.getAllBooks();}
