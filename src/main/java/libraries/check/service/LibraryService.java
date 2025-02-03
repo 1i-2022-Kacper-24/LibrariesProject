@@ -1,13 +1,10 @@
 package libraries.check.service;
 
-import libraries.check.model.BookModel;
-import libraries.check.model.LibraryModel;
-import libraries.check.model.ShelfModel;
+import libraries.check.dto.LibraryDTO;
 import libraries.check.repository.LibraryRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class LibraryService {
@@ -18,8 +15,8 @@ public class LibraryService {
         this.libraryRepository = libraryRepository;
     }
 
-    public List<LibraryModel> getAllLibraries() {
-        return libraryRepository.findAll();
+    public List<LibraryDTO> getAllLibraries() {
+        return libraryRepository.findAll().stream().map(LibraryDTO::fromModel).toList();
     }
 
 }

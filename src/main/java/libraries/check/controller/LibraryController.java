@@ -3,6 +3,7 @@ package libraries.check.controller;
   
 import libraries.check.dto.BookFoundDTO;
 import libraries.check.dto.LibrariesDTO;
+import libraries.check.dto.LibraryDTO;
 import libraries.check.model.LibraryModel;
 import libraries.check.service.LibraryService;
 import libraries.check.service.ShelfService;
@@ -29,14 +30,11 @@ public class LibraryController {
         this.shelfService = shelfService;
         this.bookService = bookService;
     }
-  
-    public LibrariesDTO getAllLibraries() {
-        return (LibrariesDTO) LibrariesDTO.fromModel(libraryService.getAllLibraries());
+
+    @GetMapping("/allLibraries")
+    public List<LibraryDTO> getAllLibs() {
+        return libraryService.getAllLibraries();
     }
-
-    @GetMapping("/allLibs")
-    public List<LibraryModel> getAllLibs() {return libraryService.getAllLibraries();}
-
 
     @GetMapping("/all")
     public List<BookModel> getAll() { return bookService.getAllBooks();}
@@ -54,7 +52,7 @@ public class LibraryController {
         return bookService.search(author, title, publicationYear, publicationIndicator, numberOfPages, pagesIndicator, cityName, shelfNumber);
     }
 
-        @PostMapping
+    @PostMapping
     public BookModel postBook(@RequestBody BookModel book) {
         return bookService.addBook(book);
     }

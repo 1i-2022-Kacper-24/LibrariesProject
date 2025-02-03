@@ -12,18 +12,18 @@ public class BookFoundDTO {
     private Integer publicationYear;
     private Integer numberOfPages;
     private Long shelfNumber;
-    private String city;
+    private String cityName;
 
     public BookFoundDTO() {
     }
 
-    public BookFoundDTO(String title, String author, Integer publicationYear, Integer numberOfPages, Long shelfNumber, String city) {
+    public BookFoundDTO(String title, String author, Integer publicationYear, Integer numberOfPages, Long shelfNumber, String cityName) {
         this.title = title;
         this.author = author;
         this.publicationYear = publicationYear;
         this.numberOfPages = numberOfPages;
         this.shelfNumber = shelfNumber;
-        this.city = city;
+        this.cityName = cityName;
     }
 
     public static BookFoundDTO fromModel(BookModel book, LibraryModel library, ShelfModel shelf) {
@@ -33,7 +33,7 @@ public class BookFoundDTO {
         bookFoundDTO.publicationYear = book.getPubYear();
         bookFoundDTO.numberOfPages = book.getPages();
         bookFoundDTO.shelfNumber = shelf.getShelfNumber();
-        bookFoundDTO.city = library.getCityName();
+        bookFoundDTO.cityName = library.getCityName();
         return bookFoundDTO;
     }
 
@@ -77,11 +77,11 @@ public class BookFoundDTO {
         this.shelfNumber = shelfNumber;
     }
 
-    public String getCity() {
-        return city;
+    public String getCityName() {
+        return cityName;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
     }
 }
