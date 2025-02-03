@@ -23,7 +23,6 @@ public class BookService {
         this.libraryService = libraryService;
     }
 
-
     public BookModel addBook(BookModel book) {
         return bookRepository.save(book);
     }
@@ -32,41 +31,11 @@ public class BookService {
         return bookRepository.findAll();
     }
 
-
-
     public List<BookFoundDTO> search(String author, String title, Integer pubYear, Integer publicationIndicator, Integer pages, Integer pagesIndicator) {
         List<BookModel> books = new ArrayList<>();
-        if (author != null && !author.isBlank()) {
-            books = bookRepository.findByAuthor(author).stream().toList();
-        }
-        else if (title != null && !title.isBlank()) {
-            books = bookRepository.findByTitle(title);
-        }
-        else if (pubYear != null && pubYear.describeConstable().isPresent()) {
-            if (publicationIndicator < 0) {
-                books = bookRepository.findByPubYearLessThan(pubYear);
-            }
-            else if (publicationIndicator > 0) {
-                books = bookRepository.findByPubYearGreaterThan(pubYear);
-            }
-            else {
-                books = bookRepository.findByPubYear(pubYear);
-            }
-        }
-        else if (pages != null && pages.describeConstable().isPresent()) {
-            if (pagesIndicator < 0) {
-                books = bookRepository.findByPagesLessThan(pages);
-            }
-            else if (pagesIndicator > 0) {
-                books = bookRepository.findByPagesGreaterThan(pages);
-            }
-            else {
-                books = bookRepository.findByPages(pages);
-            }
-        }
-        if (books.isEmpty()) {
-            return new ArrayList<>();
-        }
+
+        books = findAllBooksByParameters(author, title, pubYear, publicationIndicator, pages, pagesIndicator);
+
         List<LibraryModel> librariesWithShelvesWithBooks = libraryService.getLibraryWithShelfByBook(books);
         List<BookFoundDTO> booksFound = new ArrayList<>();
         for(LibraryModel library : librariesWithShelvesWithBooks) {
@@ -81,38 +50,10 @@ public class BookService {
         return booksFound;
     }
 
-
-    public List<BookModel> findBooksByAuthor(String author) {
-        return bookRepository.findByAuthor(author);
-    }
-
-    public List<BookModel> findBooksByTitle(String title) {
-        return bookRepository.findByTitle(title);
-    }
-
-    public List<BookModel> findBooksByPubYear(int pubYear) {
-        return bookRepository.findByPubYear(pubYear);
-    }
-
-    public List<BookModel> findBooksByPubYearGreaterThan(int pubYear) {
-        return bookRepository.findByPubYearGreaterThan(pubYear);
-    }
-
-    public List<BookModel> findBooksByPubYearLessThan(int pubYear) {
-        return bookRepository.findByPubYearLessThan(pubYear);
-    }
-
-
-    public List<BookModel> findBooksByPages(int pages) {
-        return bookRepository.findByPages(pages);
-    }
-
-    public List<BookModel> findBooksByPagesGreaterThan(int pages) {
-        return bookRepository.findByPagesGreaterThan(pages);
-    }
-
-    public List<BookModel> findBooksByPagesLessThan(int pages) {
-        return bookRepository.findByPagesLessThan(pages);
+    public List<BookModel> findAllBooksByParameters(String author, String title, Integer pubYear, Integer publicationIndicator, Integer pages, Integer pagesIndicator) {
+        String authorParam = author != null ? author : "";
+        String titleParam = title != null ? title : "";
+        return bookRepository.findAllByParameters(authorParam, titleParam, pubYear, publicationIndicator, pages, pagesIndicator);
     }
 
 }
