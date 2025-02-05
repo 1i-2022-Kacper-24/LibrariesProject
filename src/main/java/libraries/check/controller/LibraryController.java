@@ -10,8 +10,12 @@ import libraries.check.service.ShelfService;
 import libraries.check.model.BookModel;
 import libraries.check.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.http.HttpResponse;
 import java.util.List;
 
 
@@ -55,5 +59,15 @@ public class LibraryController {
     @PostMapping
     public BookModel postBook(@RequestBody BookModel book) {
         return bookService.addBook(book);
+    }
+
+    @GetMapping("/check")
+    public ResponseEntity<Void> checkLiveness(){
+        try {
+            List<LibraryDTO> libraries = libraryService.getAllLibraries();
+        } catch (RuntimeException ex) {
+            return ResponseEntity.status(HttpStatusCode.valueOf(503)).build();
+        }
+        return ResponseEntity.ok().build();
     }
 }
